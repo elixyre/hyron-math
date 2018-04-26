@@ -8,7 +8,7 @@ import fr.hyron.math.factorial.logFactorial
   */
 object bell {
 
-  def s(n: Int, k: Int): Int = {
+  def s(n: Int, k: Int): BigInt = {
     // S(n,k) = S(n-1,k-1) + kS(n-1,k)
     // S(n,1) = S(n,n) = 1
     // S(n,2) = 2^(n-1) - 1
@@ -21,7 +21,7 @@ object bell {
     }
   }
 
-  def bell(n: Int, k: Int): Int = (1 to k).foldLeft(0)(_ + s(n, _))
+  def bell(n: Int, k: Int): BigInt = (1 to k).foldLeft(BigInt(0))(_ + s(n, _))
 
   def dichotomie_imax(n: Int, bMin: Int, bMax: Int): Int = {
     val i_piv = ceil((bMax + bMin).toDouble / 2).toInt
