@@ -59,4 +59,18 @@ class BellTest extends FunSuite {
     )
   }
 
+  test("compute the probability of a partition of n elements into k parts") {
+    assert(math.abs(bell.p(6,  25) - 0.00313161) < 10e-9)
+    assert(math.abs(bell.p(7,  25) - 0.02110279) < 10e-9)
+    assert(math.abs(bell.p(8,  25) - 0.07431024) < 10e-9)
+    assert(math.abs(bell.p(9,  25) - 0.15689865) < 10e-9)
+    assert(math.abs(bell.p(10, 25) - 0.21855285) < 10e-9)
+    assert(math.abs(bell.p(11, 25) - 0.21526871) < 10e-9)
+    assert(math.abs(bell.p(12, 25) - 0.15794784) < 10e-9)
+    assert(math.abs(bell.p(13, 25) - 0.08987171) < 10e-9)
+    assert(math.abs(bell.p(14, 25) - 0.04093663) < 10e-9)
+    assert(math.abs(bell.p(15, 25) - 0.01531445) < 10e-9)
+    assert(math.abs(bell.p(16, 25) - 0.00480507) < 10e-9)
+  }
+
 }

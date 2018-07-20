@@ -46,7 +46,7 @@ object bell {
   private[this] val expm1_approx_array: Array[Double] = {
     val ar = new Array[Double](19)
     ar(0) = 1.0
-    (1 to 18).map(i => ar(i) = ar(i - 1) + pow(-1, i) / factorial.factorial(i).toDouble)
+    (1 to 18).foreach(i => ar(i) = ar(i - 1) + pow(-1, i) / factorial.factorial(i).toDouble)
     ar
   }
 
@@ -71,5 +71,36 @@ object bell {
     }
     acc = log(acc) + n * log(i0) - logFactorial(i0)
     acc
+  }
+
+  /**
+    * Probability to have a partition of n elements into m parts
+    * @param m number of parts
+    * @param n number of elements
+    */
+  def p(m: Int, n: Int): Double = {
+    if (n < 13) {
+      s(n,m).toDouble / bell(n, n).toDouble
+    } else {
+      math.exp(
+        n * math.log(m) - 1 - factorial.logFactorial(m) - logBell(n, n)
+      )
+    }
+  }
+
+  /** Randomly choose the number of parts of a partition of n elements
+    *
+    * cf. A. J. Stam algorithm / Knuth - F3B 7.2.1.5.
+    * (https://www-cs-faculty.stanford.edu/~knuth/fasc3b.ps.gz)
+    */
+  def chooseM(n: Int): Int = {
+    val rand = scala.util.Random.nextDouble()
+    var i = 1
+    var prob: Double = 0
+    while (rand > prob) {
+      prob += p(i, n)
+      i += 1
+    }
+    i
   }
 }
